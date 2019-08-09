@@ -1,24 +1,48 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 
-function Index() {
-    const [data, setData] = useState(0);
-
-    // useCallback 会记录下记忆值
-    // 如果写入第二个参数 则会参数改变 再次更新
-    const memoizedCallback = useCallback(
-      () => {
-          return data;
-      }, []
-    )
-    console.log('记忆data:', memoizedCallback());
-    console.log('新data:', data);
+const Foo = memo (function Foo (props) {
+    console.log('Counter render')
     return (
-      <div>
-          data: { data }
-          <button onClick={() => { setData(data + 1) }}>+</button>
-          <button onClick={() => { setData(data - 1) }}>-</button>
+      <h1 onClick={props.onClick}>点击{props.count}</h1>
+    )
+})
+
+function Index (props) {
+    const [count, setCount] = useState(0);
+    const [clickCount, setClickCount] = useState(0);
+
+    const double = useMemo(() => {
+        return count * 2
+    }, [count === 3])
+
+    // const onClick = () => {
+    //     console.log('Click')
+    // }
+
+    // const onClick = useCallback(() => {
+    //     console.log('Click')
+    // },[])
+
+    // const onClick = useCallback(() => {
+    //     console.log('Click')
+    //     setClickCount(clickCount + 1)
+    // },[clickCount, setClickCount])
+
+    const onClick = useCallback(() => {
+        console.log('Click')
+        setClickCount((clickCount) => clickCount + 1)
+    },[])
+
+    return (
+      <div style={{padding:'100px'}}>
+          <button type="button"
+                  onClick={() => {setCount(count + 1) }}
+          >
+              Click({count}{clickCount}) double: ({double})
+          </button>
+          <Foo count={double} onClick={onClick} />
       </div>
-    );
+    )
 }
 
-export default Index;
+export default Index

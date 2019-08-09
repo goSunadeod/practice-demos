@@ -1,21 +1,29 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 
-function Index() {
-    const [memoCount, setMemoCount] = useState(0);
+function Foo (props) {
+    return (
+      <h1>{props.count}</h1>
+    )
+}
+function Index () {
+    const [count, setCount] = useState(0);
 
-    useMemo(() => {
-        console.log('memoCount:',memoCount);
-    }, [memoCount]);
+    const double = useMemo(() => {
+        return count * 2
+    }, [count])
 
     return (
-      <>
-          { memoCount }
-          <button onClick={() => setMemoCount(memoCount + 1)}>
-              change memoCount
+      <div>
+          <button type="button"
+                  onClick={() => {setCount(count + 1) }}
+          >
+              Click({count}) double: ({double})
           </button>
-      </>
-    );
+          <Foo count={count}/>
+      </div>
+    )
 }
+
 
 export default Index;
