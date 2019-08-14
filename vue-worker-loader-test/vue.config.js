@@ -1,10 +1,15 @@
 module.exports = {
-  chainWebpack(config) {
-    config.module
-      .rule('worker')
-      .test(/worker\.js$/)
-      .use('worker-loader')
-      .loader('worker-loader')
-      .end();
+  chainWebpack: config => {
+    config.module.rule("js").exclude.add(/\.worker\.js$/);
   },
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.worker\.js$/,
+          use: { loader: "worker-loader" }
+        }
+      ]
+    }
+  }
 };
