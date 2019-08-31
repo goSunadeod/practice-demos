@@ -11,6 +11,7 @@ import UseCallback from './api/useCallback';
 import UseReducer from './api/useReducer';
 import UseMemo from './api/useMemo';
 import Memoized from './api/memoized';
+import TodoList from './todoList';
 
 ReactDOM.render(
   <div>
@@ -24,6 +25,7 @@ ReactDOM.render(
         <li><a href="#/useReducer">UseReducer</a></li>
       <li><a href="#/useMemo">UseMemo</a></li>
       <li><a href="#/memoized">Memoized</a></li>
+      <li><a href="#/todo">TodoList</a></li>
     </ul>
     <HashRouter>
       <Switch>
@@ -36,6 +38,7 @@ ReactDOM.render(
         <Route exact path="/useReducer" component={UseReducer}></Route>
         <Route exact path="/useMemo" component={UseMemo}></Route>
         <Route exact path="/memoized" component={Memoized}></Route>
+        <Route exact path="/todo" component={TodoList}></Route>
       </Switch>
     </HashRouter>
   </div>,
