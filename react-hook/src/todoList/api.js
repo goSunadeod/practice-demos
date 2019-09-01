@@ -80,3 +80,9 @@ export const toggleTodo = withDelay(id => {
     }
     return Promise.resolve(true);
 });
+
+export const deleteTodo = withDelay((e, idx) => {
+    e.persist();
+    todos.splice(idx, 1);
+    return Promise.resolve(true);
+});

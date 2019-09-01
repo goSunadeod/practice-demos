@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from "react";
 import TodoInput from "./todo-input";
 import TodoList from "./todo-list";
-import { Tabs, Spin} from "antd";
-import { fetchTodos, toggleTodo } from "./api";
+import { Tabs, Spin, Row, Col, Button} from "antd";
+import { fetchTodos, toggleTodo, addTodo, deleteTodo } from "./api";
 import { useRequest, useWithLoading } from './hooks'
 
 import "antd/dist/antd.css";
@@ -22,12 +22,11 @@ function Todo() {
     const [activeTab, setActiveTab] = useState(TAB_ALL);
 
     const [query, setQuery] = useState("");
-    const {loading: listLoading, data: todos} = useRequest(() => {
+    const {loading: listLoading, data: todos, setData} = useRequest(() => {
         return fetchTodos({ tab: activeTab, query });
     }, [query, activeTab])
 
     const [placeholder, setPlaceholder] = useState("");
-    // placeHolder
     useEffect(() => {
         setPlaceholder(`在${tabMap[activeTab]}内搜索`);
     }, [activeTab]);
@@ -39,7 +38,25 @@ function Todo() {
       }
     );
 
-    const loading = !!listLoading || !!toggleLoading;
+    const { func: handleAdd, loading: addLoading } = useWithLoading(
+      async () => {
+            const obj =  {
+                id: +new Date(),
+                text: `new-todo${+new Date()}`,
+                finished: false
+            };
+          await addTodo(obj);
+     }
+    )
+
+    const { func: onDelete } = useWithLoading(
+      async (e, idx) => {
+          await deleteTodo(e, idx);
+      }
+    )
+
+    const loading = !!listLoading || !!toggleLoading || !!addLoading;
+
 
     // const [loading, setLoading] = useState(false);
     // const [todos, setTodos] = useState([]);
@@ -64,9 +81,17 @@ function Todo() {
           </Tabs>
           <div className="app-wrap">
               <h1 className="app-title">Todo List</h1>
-              <TodoInput placeholder={placeholder} onSetQuery={setQuery} />
+              <p style={{fontSize: '12px', color: '#a6a6a6'}}>点击todo列表更新状态，点击删除icon为删除已完成的todo</p>
+              <Row>
+                  <Col span={6}>
+                      <TodoInput placeholder={placeholder} onSetQuery={setQuery} />
+                  </Col>
+                  <Col span={6}>
+                      <Button onClick={handleAdd}>新增</Button>
+                  </Col>
+              </Row>
               <Spin spinning={loading} tip="稍等片刻~">
-                  <TodoList todos={todos} onToggleFinished={onToggleFinished}/>
+                  <TodoList todos={todos} onToggleFinished={onToggleFinished} onDelete={onDelete}/>
               </Spin>
           </div>
       </>

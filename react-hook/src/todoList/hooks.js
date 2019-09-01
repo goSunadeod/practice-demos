@@ -67,6 +67,5 @@ export function useWithLoading(fn) {
             setLoading(false);
         });
     };
-
     return { func, loading };
 }

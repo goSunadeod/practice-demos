@@ -2,11 +2,13 @@ import React from "react";
 import { List, Icon } from "antd";
 import classNames from "classnames";
 
-const TodoList = ({ todos, onToggleFinished }) => {
-    const onDelete = e => {
-        e.stopPropagation();
-        // 删除
-    };
+const TodoList = ({ todos, onToggleFinished, onDelete }) => {
+    function getIcon(finished, idx) {
+        if (finished) {
+            return <Icon type="delete" onClick={(e) => onDelete(e, idx)} />
+        }
+        return null;
+    }
 
     return (
       <div className="list-wrap">
@@ -28,7 +30,7 @@ const TodoList = ({ todos, onToggleFinished }) => {
                           className="list-item-wrap"
                         >
                             <span className="list-item-text">{text}</span>
-                            <Icon type="delete" onClick={onDelete} />
+                            {getIcon(finished, idx)}
                         </div>
                     </List.Item>
                   );
