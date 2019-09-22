@@ -42,7 +42,6 @@ function display () {
 
 function remove ( item ) {
     var prevNode = this.findPrev( item );
-    console.log(prevNode.next);
     prevNode.next = prevNode.next.next;
 }
 

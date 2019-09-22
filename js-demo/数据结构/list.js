@@ -1,3 +1,5 @@
+// 参考系列： https://www.jianshu.com/p/cea9f3be42f5
+
 function List() {
 	this.listSize = 0;
 	this.pos = 0;
