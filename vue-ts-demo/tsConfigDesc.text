@@ -1,0 +1,21 @@
+// 这是对tsconfig.json 的解释说明
+{
+    "include": [], // 编译包含哪些文件
+    "exclude":[], // 编译排除哪些文件
+    "compilerOptions": {  // 编译选项
+    "target": "es5",    // 指定ECMAScript目标版本'ES3' (默认)，'ES5'，或'ES6'
+    "module": "commonjs",  // 指定生成哪个模块系统代码
+    "lib": [  // 编译过程中需要引入的库文件的列表
+      "dom",
+      "es5",
+      "es2015.promise"
+    ],
+    "allowJs": true,  // 允许编译javascript文件。
+    "strict": true,  // 严格模式
+    "baseUrl": "./",  // 解析非相对模块名的基准目录。
+    "paths": {  // 模块名到基于baseUrl的路径映射的列表
+      "@/*":["src/*"]
+    },
+    "esModuleInterop": true,  // 支持CommonJS和ES模块之间的互操作性
+    "experimentalDecorators": true,  // 实验性启用ES7装饰器支持。
+}
