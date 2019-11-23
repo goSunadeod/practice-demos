@@ -12,7 +12,16 @@ import UseReducer from './api/useReducer';
 import UseMemo from './api/useMemo';
 import Memoized from './api/memoized';
 import TodoList from './todoList';
+// import Lesson from './hookApiDemo/App';
+// import Lesson from './hookApiDemo/hooks/App';
+// import Lesson from './hookApiDemo/hooks/ref-demo';
+// import Lesson from './hookApiDemo/hooks/effect-time-demo';
+// import Lesson from './hookApiDemo/hooks/optimization';
+// import Lesson from './hookApiDemo/hooks/closure';
+import Lesson from './hookApiDemo/hooks/cond';
 
+// app -> object(Fiber) -> [hook1, hook2, hook3, hook4]
+// hook的 执行顺序 数量都不能变
 ReactDOM.render(
   <div>
     <ul>
@@ -26,6 +35,7 @@ ReactDOM.render(
       <li><a href="#/useMemo">UseMemo</a></li>
       <li><a href="#/memoized">Memoized</a></li>
       <li><a href="#/todo">TodoList</a></li>
+      <li><a href="#/lesson">Lesson</a></li>
     </ul>
     <HashRouter>
       <Switch>
@@ -39,6 +49,7 @@ ReactDOM.render(
         <Route exact path="/useMemo" component={UseMemo}></Route>
         <Route exact path="/memoized" component={Memoized}></Route>
         <Route exact path="/todo" component={TodoList}></Route>
+        <Route exact path="/lesson" component={Lesson}></Route>
       </Switch>
     </HashRouter>
   </div>,
