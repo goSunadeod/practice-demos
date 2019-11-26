@@ -217,6 +217,11 @@ class Demo extends React.Component {
         this.onNodeCheck(e, {key: '0-0-0-0'}, this.isSelected)
     }
 
+    onCheck = checkedKeys => {
+        console.log('onCheck', checkedKeys);
+        this.setState({ checkedKeys });
+    };
+
     renderTreeNodes = data =>
       data.map(item => {
           if (item.children) {
@@ -236,7 +241,7 @@ class Demo extends React.Component {
               <Tree
                 checkable
                 defaultExpandAll
-                checkStrictly={true}
+                onCheck={this.onCheck}
                 checkedKeys={this.state.checkedKeys}
               >
                   {this.renderTreeNodes(treeData)}

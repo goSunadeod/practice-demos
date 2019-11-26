@@ -152,7 +152,12 @@ class Demo extends React.Component {
             });
         }
         recursive(treeData, null, (node, parent) => {
-            // 当前的选中的节点 selectNode 不需要处理
+            // 这里需要吧点击的加进去
+            if (this.isSelected) {
+                checkedKeys.push(selectNode.key);
+            } else {
+                checkedKeys = checkedKeys.filter(item => item !== selectNode.key);
+            }
 
             // 如果是子节点，将子节点选中或删除
             const isTargetChildren = node.level > selectNode.level && node.parentKey.includes(selectNode.key);
@@ -187,11 +192,6 @@ class Demo extends React.Component {
                 }
             }
         });
-        if (this.isSelected) {
-            checkedKeys.push(selectNode.key);
-        } else {
-            checkedKeys = checkedKeys.filter(item => item !== selectNode.key);
-        }
         // 在选中的节点中，将没有子节点被选中的父节点过滤掉
         checkedKeys = checkedKeys.filter(item => !tempList[item]);
         console.timeEnd('time span');
