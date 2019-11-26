@@ -12,6 +12,7 @@ import UseReducer from './api/useReducer';
 import UseMemo from './api/useMemo';
 import Memoized from './api/memoized';
 import TodoList from './todoList';
+import TreeDemo from './tree-check';
 // import Lesson from './hookApiDemo/App';
 // import Lesson from './hookApiDemo/hooks/App';
 // import Lesson from './hookApiDemo/hooks/ref-demo';
@@ -35,6 +36,7 @@ ReactDOM.render(
       <li><a href="#/useMemo">UseMemo</a></li>
       <li><a href="#/memoized">Memoized</a></li>
       <li><a href="#/todo">TodoList</a></li>
+      <li><a href="#/tree">Tree集联</a></li>
       <li><a href="#/lesson">Lesson</a></li>
     </ul>
     <HashRouter>
@@ -49,6 +51,7 @@ ReactDOM.render(
         <Route exact path="/useMemo" component={UseMemo}></Route>
         <Route exact path="/memoized" component={Memoized}></Route>
         <Route exact path="/todo" component={TodoList}></Route>
+        <Route exact path="/tree" component={TreeDemo}></Route>
         <Route exact path="/lesson" component={Lesson}></Route>
       </Switch>
     </HashRouter>
