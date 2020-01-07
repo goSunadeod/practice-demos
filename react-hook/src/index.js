@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import App from './App';
+import Demo from './demo';
 import UseState from './api/useState';
 import UseEffect from './api/useEffect';
 import UseRef from './api/useRef';
@@ -27,6 +28,7 @@ ReactDOM.render(
   <div>
     <ul>
       <li><a href="#/">Home</a></li>
+      <li><a href="#/demo">Demo</a></li>
       <li><a href="#/useState">UseState</a></li>
       <li><a href="#/useEffect">UseEffect</a></li>
         <li><a href="#/useRef">UseRef</a></li>
@@ -42,6 +44,7 @@ ReactDOM.render(
     <HashRouter>
       <Switch>
         <Route exact path="/" component={App}></Route>
+        <Route exact path="/demo" component={Demo}></Route>
         <Route exact path="/useState" component={UseState}></Route>
         <Route exact path="/useEffect" component={UseEffect}></Route>
         <Route exact path="/useRef" component={UseRef}></Route>
