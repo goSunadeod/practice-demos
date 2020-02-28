@@ -215,19 +215,7 @@ class Vue {
       new Observer(this.$data)
 
       // 把数据获取数据操作 vm上的取值操作 都代理到 vm.$data
-      this.proxyVm(this.$data)
-
       new Complier(this.$el, this)
-    }
-  }
-
-  proxyVm(data) {
-    for(let key in data) {
-      Object.defineProperty(this, key, {
-        get() {
-          return data[key];
-        }
-      })
     }
   }
 }

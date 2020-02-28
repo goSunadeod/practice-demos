@@ -151,7 +151,7 @@ CompileUtil = {
      return data[current]
    }, vm.$data)
   },
-  setValue(vm, expr, value) {
+  setValue(vm, expr, valeu) {
     expr.split('.').reduce((data, current, index, arr) => {
       if (arr.length - 1 === index) {
         // 最后一项
@@ -166,7 +166,7 @@ CompileUtil = {
     new Watcher(vm, expr, (newVal) => { // 输入框添加观察者
       fn(node, newVal)
     })
-    node.addEventListener('input', (e) => {
+    node.addEventListenrt('input', (e) => {
       let value = e.target.value;
       this.setValue(vm, expr, value)
     })
@@ -213,21 +213,7 @@ class Vue {
 
       // 把数据 全部 defineProperty劫持
       new Observer(this.$data)
-
-      // 把数据获取数据操作 vm上的取值操作 都代理到 vm.$data
-      this.proxyVm(this.$data)
-
       new Complier(this.$el, this)
-    }
-  }
-
-  proxyVm(data) {
-    for(let key in data) {
-      Object.defineProperty(this, key, {
-        get() {
-          return data[key];
-        }
-      })
     }
   }
 }

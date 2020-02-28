@@ -223,11 +223,7 @@ class Vue {
 
   proxyVm(data) {
     for(let key in data) {
-      Object.defineProperty(this, key, {
-        get() {
-          return data[key];
-        }
-      })
+      
     }
   }
 }

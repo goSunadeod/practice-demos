@@ -38,8 +38,8 @@ function Index() {
           >
               -
           </button>
-          <br />
-          <button onClick={handleClick}>测试循环</button>
+          <br />>
+          <button onClick={handleClick}></button>
       </>
     )
 }

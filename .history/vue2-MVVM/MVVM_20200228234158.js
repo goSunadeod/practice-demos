@@ -220,14 +220,4 @@ class Vue {
       new Complier(this.$el, this)
     }
   }
-
-  proxyVm(data) {
-    for(let key in data) {
-      Object.defineProperty(this, key, {
-        get() {
-          return data[key];
-        }
-      })
-    }
-  }
 }

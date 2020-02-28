@@ -6,8 +6,8 @@ function Index() {
         const initState = 0;
         return initState + 1
     });
-    const [age, setAge] = useState(0);
-    function handleClick () {
+    const [age, setAge] = useState(0)
+    handleClick = () => {
         [1,2].forEach(item => {
             setAge(item)
         })
@@ -38,8 +38,8 @@ function Index() {
           >
               -
           </button>
-          <br />
-          <button onClick={handleClick}>测试循环</button>
+          <br />>
+          <button onClick={handleClick}></button>
       </>
     )
 }

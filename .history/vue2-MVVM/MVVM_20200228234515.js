@@ -225,7 +225,7 @@ class Vue {
     for(let key in data) {
       Object.defineProperty(this, key, {
         get() {
-          return data[key];
+          return data[key]
         }
       })
     }
