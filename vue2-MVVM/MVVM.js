@@ -101,8 +101,9 @@ class Complier{
       let {name, value: expr} = attr
       if (this.isDirective(name)) {
         let [, directive] = name.split('-')
+        let [directiveName, eventName] = directive.split(':')
         // 需要调用不同的指令来处理
-        CompileUtil[directive](node, expr, this.vm)
+        CompileUtil[directiveName](node, expr, this.vm, eventName)
       }
   })
   }
@@ -182,6 +183,11 @@ CompileUtil = {
       return this.getValue(vm, args[1])
     })
   },
+  on(node, expr, vm, eventName) {
+    node.addEventListener(eventName, (e) => {
+      vm[expr].call(vm, e) // this.change
+    })
+  },
   text(node, expr, vm) {
     let fn = this.updater['textUpdater']
     let content = expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
@@ -208,11 +214,29 @@ class Vue {
   constructor(options) {
     this.$el = options.el;
     this.$data = options.data;
+    let computed = options.computed;
+    let methods = options.methods;
    // 存在编译模板
     if(this.$el) {
 
       // 把数据 全部 defineProperty劫持
       new Observer(this.$data)
+
+      for(let key in computed) {
+        Object.defineProperty(this.$data, key, {
+          get: () => {
+            return computed[key].call(this)
+          }
+        })
+      }
+
+      for(let key in methods) {
+        Object.defineProperty(this, key, {
+          get() {
+            return methods[key]
+          }
+        })
+      }
 
       // 把数据获取数据操作 vm上的取值操作 都代理到 vm.$data
       this.proxyVm(this.$data)
@@ -226,6 +250,10 @@ class Vue {
       Object.defineProperty(this, key, {
         get() {
           return data[key];
+        },
+        set(newVal) {
+          console.log(222)
+          data[key] = newVal
         }
       })
     }
