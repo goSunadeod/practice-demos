@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "jQuery Checker",
+  "version": "1.0.0",
+  "description": "This extension verifies jQuery exists somewhere on this page",
+  "icons": {
+    "16": "images/color-logo16.png",
+      "32": "images/color-logo32.png",
+      "48": "images/color-logo48.png",
+      "128": "images/color-logo128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/color-logo16.png",
+      "32": "images/color-logo32.png",
+      "48": "images/color-logo48.png",
+      "128": "images/color-logo128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Check to see if jQuery is on this page"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -35,7 +35,8 @@
       },
       methods: {
         change() {
-          this.school.name = 'TEST'
+          this.school.name = 'TEST' // 因为我代理的只是school 没有深层次递归 所以 只触发了代理的get 没有set
+          // this.school = {a: 2} 这样才会触发set
         }
       }
     })

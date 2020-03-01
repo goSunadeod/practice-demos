@@ -252,7 +252,6 @@ class Vue {
           return data[key];
         },
         set(newVal) {
-          console.log(222)
           data[key] = newVal
         }
       })
