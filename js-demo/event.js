@@ -1,6 +1,6 @@
 let event = {
     list: {},
-    on(key, fn) {
+    on(key, fn) { // 发布订阅 两者之间没有联系
         if(!this.list[key]) {
             this.list[key] = []
         }

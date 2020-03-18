@@ -40,9 +40,9 @@ function read(...args) {
 //   console.log(data);
 // })
 
-let promise = new Promise((resolve, reject) => {
-  resolve('hello')
-})
+// let promise = new Promise((resolve, reject) => {
+//   resolve('hello')
+// })
 
 // let promise2 = promise.then((data) => {
 //   return new Promise((resolve, reject) => {

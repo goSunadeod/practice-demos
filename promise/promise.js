@@ -53,6 +53,9 @@ class Promise {
     // 箭头函数保证this指向
     const resolve = value => {
       if (this.status === PENDING) {
+        if(value instanceof Promise) {// 直到解析出普通值
+          return value.then(resolve, reject)
+        }
         this.status = FULFILLED;
         this.value = value;
         this.onFulfilledCallBacks.forEach(fn => fn(this.value));
@@ -140,7 +143,13 @@ class Promise {
     });
     return promise2;
   }
+
+  catch(errCallBack) {
+    return this.then(null, errCallBack)
+  }
 }
+
+
 
 
 // promises-aplus-tests promise.js 
