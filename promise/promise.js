@@ -147,6 +147,13 @@ class Promise {
   catch(errCallBack) {
     return this.then(null, errCallBack)
   }
+
+  finally(callback) {
+    return this.then(
+      value => Promise.resolve(callback()).then(() => value),             // Promise.resolve执行回调,并在then中return结果传递给后面的Promise
+      reason => Promise.resolve(callback()).then(() => { throw reason })  // reject同理
+    )
+  }
 }
 
 
