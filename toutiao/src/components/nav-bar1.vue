@@ -1,12 +1,12 @@
 <template>
-  <section :class="b('')">
-    <div :class="b('wrapper')" ref="nav">
+  <section class="tt-navbar1">
+    <div class="tt-navbar1__wrapper" ref="nav">
       <a
-        v-for="(title, i) of titles"
+        v-for="(title, i) of titleList"
         :key="title"
-        ref="titles"
+        :ref="el => { titles[i] = el }"
         :class="{ active: active === i }"
-        @click="hanlderNav(i)"
+        @click="handlerNav(i)"
         >{{ title }}</a
       >
     </div>
@@ -15,41 +15,50 @@
 </template>
 
 <script>
-import create from "@/utils/create";
+// import create from "@/utils/create";
 import { scrollLeftTo } from "@/utils";
+import { ref } from 'vue'
 
-export default create({
+export default {
   name: "navbar1",
-  data() {
-    return {
-      active: 0,
-      titles: [
-        "军事",
-        "娱乐",
-        "视频",
-        "影视",
-        "愉快",
-        "你你",
-        "是谁",
-        "事实",
-        "与人",
-      ],
-    };
-  },
-  methods: {
-    hanlderNav(i) {
-      this.active = i;
-      this.scrollIntoView();
-    },
-    scrollIntoView(immediate) {
-      const { titles, nav } = this.$refs;
-      const title = titles[this.active];
-      const to = title.offsetLeft - (nav.offsetWidth - title.offsetWidth) / 2;
-     
-      scrollLeftTo(nav, to, immediate ? 0 : +0.3);
+  setup() {
+    const titles = ref([])
+    const nav = ref(null)
+    const active = ref(0)
+    const titleList = ref([
+      "军事",
+      "娱乐",
+      "视频",
+      "影视",
+      "V3",
+      "愉快",
+      "你你",
+      "是谁",
+      "事实",
+      "与人",
+    ])
+
+    const handlerNav = (i) => {
+      active.value = i;
+      scrollIntoView();
     }
-  },
-});
+
+    const scrollIntoView = (immediate) => {
+      const title = titles.value[active.value];
+      const to = title.offsetLeft - (nav.value.offsetWidth - title.offsetWidth) / 2;
+      scrollLeftTo(nav.value, to, immediate ? 0 : 0.3);
+    }
+
+    // 把创建的引用 return 出去
+    return {
+      titles,
+      nav,
+      handlerNav,
+      active,
+      titleList
+    }
+  }
+};
 </script>
 
 <style lang="scss">

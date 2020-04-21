@@ -1,10 +1,9 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Layout from '@/views/Layout';
 
-Vue.use(Router);
+export default createRouter({
+    history: createWebHashHistory(),
 
-export default new Router({
     routes: [
         {
             path: '/',
