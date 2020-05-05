@@ -1,0 +1,22 @@
+{
+  "name": "AST-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-types": "^6.26.0",
+    "escodegen": "^1.14.1",
+    "esprima": "^4.0.1",
+    "estraverse": "^5.1.0"
+  },
+  "dependencies": {
+    "loadsh": "0.0.4"
+  }
+}
