@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script>
+    /*
+        let total = 100000;
+        let timer = Date.now();
+        let container = document.getElementById('container')
+        //新版浏览器优化，当js执行完成之后会一并插入页面，当然可以用fragment
+        for(let i=0; i<total; i++) {
+          let li = document.createElement('li');
+          li.innerHTML = i;
+          container.appendChild(li)
+        }
+    
+        console.log(Date.now()  - timer)
+    
+        // ui渲染并且js执行完成花费时间
+        setTimeout(() => {
+          console.log(Date.now()  - timer)
+        }, 0)
+    */
+
+    // 分片，按固定数据每次加载
+    let total = 100000;
+    let index = 0;
+    let id = 0;
+    function load() {
+      index += 50;
+      if (index < total) {
+        requestAnimationFrame(() => {
+          for (let i = 0; i < 50; i++) {
+            let li = document.createElement('li');
+            li.innerHTML = id++;
+            container.appendChild(li)
+          }
+          load();
+        })
+        // setTimeout(() => {
+        //   for (let i = 0; i < 50; i++) {
+        //     let li = document.createElement('li');
+        //     li.innerHTML = id++;
+        //     container.appendChild(li)
+        //   }
+        //   load();
+        // }, 0)
+      }
+    }
+    load();
+
+
+  </script>
+
+</body>
+
+</html>
