@@ -2,7 +2,7 @@
   <div id="app">
     <!-- 定高 -->
     <VirtualList :size="40" :remain="8" :items="items">
-      <Items slot-scope="{item}" :item="item"></Items>
+      <Items slot-scope="{item}" :item="item" :size="40"></Items>
     </VirtualList>
   </div>
 </template>

@@ -26,9 +26,18 @@ export default {
     }
   },
   computed: {
+    // 三屏渲染
+    prevCount() {
+      return Math.min(this.start, this.remain);
+    },
+    nextCount() {
+      return Math.min(this.remain, this.items.length - this.end);
+    },
     // 可见数据
     visibleData() {
-      return this.items.slice(this.start, this.end)
+      let start = this.start - this.prevCount;
+      let end = this.end + this.nextCount
+      return this.items.slice(start, end)
     }
   },
   mounted() {
@@ -41,7 +50,8 @@ export default {
       let scrollTop = this.$refs.viewport.scrollTop
       this.start = Math.floor(scrollTop / this.size)
       this.end = this.start + this.remain
-      this.offset = this.start * this.size
+      // 注意减上屏
+      this.offset = this.start * this.size - this.size * this.prevCount
     }
   }
 }
