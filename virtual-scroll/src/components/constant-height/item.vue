@@ -1,5 +1,5 @@
 <template>
-  <div :style="{padding: '20px', border: '1px solid'}">{{item.value}}</div>
+  <div :style="{height: `${size}px`, border: '1px solid'}">{{item.value}}</div>
 </template>
 
 <script>
