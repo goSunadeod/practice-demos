@@ -1,8 +1,6 @@
 const path = require('path');
 const { name } = require('./package.json')
 
-const port = 6663
-
 module.exports = {
   webpack: (config) => {
     // 微应用的包名，这里与主应用中注册的微应用名称一致
@@ -30,9 +28,7 @@ module.exports = {
       };
       // 配置 history 模式
       config.historyApiFallback = true;
-      config.port = port;
-      config.open = false;
-      consol
+      console.log('test');
       return config;
     };
   },

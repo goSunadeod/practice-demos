@@ -1,38 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Home from './components/Home';
 import './public-path';
 
-const BASE_NAME = window.__POWERED_BY_QIANKUN__ ? "/react-three" : "";
+const BASE_NAME = window.__POWERED_BY_QIANKUN__ ? "/react-three" : "/";
 
 function render() {
   ReactDOM.render(
-    <HashRouter basename={BASE_NAME}>
+    <Router basename={BASE_NAME}>
       <Switch>
         <Route exact path="/" component={App}></Route>
         <Route exact path="/Home" component={Home}></Route>
       </Switch>
-    </HashRouter>,
+    </Router>,
     document.getElementById("root"));
 }
 
 // 生命周期 - 挂载前
-export async function bootstrap(props) {
+export async function bootstrap() {
   console.log('react-three bootstrap');
 
 }
 // 生命周期 - 挂载后
-export async function mount() {
+export async function mount(props) {
   console.log('react-three mount');
   // 渲染
-  render()
+  render(props)
 }
 // 生命周期 - 解除挂载
 export async function unmount() {
   console.log('react-three unmount');
+  ReactDOM.unmountComponentAtNode(document.getElementById("root"));
 }
 
 // 本地调试

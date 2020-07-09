@@ -5,6 +5,8 @@
     <button @click="changeView('/one')">子应用one</button>
     &nbsp;
     <button @click="changeView('/two')">子应用two</button>
+    &nbsp;
+    <button @click="changeView('/react-three')">子应用react-three</button>
     <br />
     <br />
     <!--增加修改state的按钮-->
