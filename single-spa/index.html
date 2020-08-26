@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="/lib/umd/single-spa.js"></script>
+
+  <script>
+    // 加载
+    singleSpa.registerApplication('app1',
+      async () => {
+        return {
+          bootstrap: async () => {
+            console.log('应用启动')
+          },
+          mount: async () => {
+            console.log('应用挂载')
+          },
+          unmount: async () => {
+            console.log('应用卸载')
+          },
+        },
+          location => location.hash.startsWith('#/app1'),
+          { store: { name: 'test' } }
+      })
+
+      // 挂载
+      // singleSpa.start();
+  </script>
+</body>
+
+</html>
