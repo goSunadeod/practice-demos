@@ -14,6 +14,7 @@ export function reroute() {
     appsToMount,
     appsToUnmount
   } = geyAppChanges();
+  // start 方法同步其内部加载promise流程是异步
   if (started) {
     // app装载
     return performAppChanges();
@@ -30,7 +31,13 @@ export function reroute() {
 
     appsToLoad.map(async (app) => {
       app = await toLoadPromise(app);
-      app = await toMountPromise(app);
+      app = await toBootstrapPromise(app);
+      return await toMountPromise(app);
+    })
+
+    // 到这一步 loadApp已经执行完毕
+    appsToMount.map(async (app) => {
+      app = await toBootstrapPromise(app);
       return await toMountPromise(app);
     })
   }

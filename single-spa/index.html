@@ -13,24 +13,43 @@
   <script>
     // 加载
     singleSpa.registerApplication('app1',
-      async () => {
+      async (props) => {
         return {
-          bootstrap: async () => {
-            console.log('应用启动')
+          bootstrap: async (props) => {
+            console.log('应用启动1')
           },
-          mount: async () => {
-            console.log('应用挂载')
+          mount: async (props) => {
+            console.log('应用挂载1')
           },
-          unmount: async () => {
-            console.log('应用卸载')
+          unmount: async (props) => {
+            console.log('应用卸载1')
           },
-        },
-          location => location.hash.startsWith('#/app1'),
-          { store: { name: 'test' } }
-      })
+        }
+      },
+      location => location.hash.startsWith('#/app1'),
+      { store: { name: 'test1' } }
+    )
 
-      // 挂载
-      // singleSpa.start();
+    singleSpa.registerApplication('app2',
+      async (props) => {
+        return {
+          bootstrap: async (props) => {
+            console.log('应用启动2')
+          },
+          mount: async (props) => {
+            console.log('应用挂载2')
+          },
+          unmount: async (props) => {
+            console.log('应用卸载2')
+          },
+        }
+      },
+      location => location.hash.startsWith('#/app2'),
+      { store: { name: 'test2' } }
+    )
+
+    // 挂载
+    singleSpa.start();
   </script>
 </body>
 

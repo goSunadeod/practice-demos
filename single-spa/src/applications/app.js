@@ -7,10 +7,12 @@ export function registerApplication(appName, loadApp, activeWhen, customProps) {
     name: appName,
     loadApp,
     activeWhen,
-    customProps
+    customProps,
+    status: NOT_LOADED
   })
   reroute();
 }
+
 
 
 export function geyAppChanges() {
