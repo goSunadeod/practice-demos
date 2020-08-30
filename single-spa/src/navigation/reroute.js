@@ -4,6 +4,7 @@ import { toLoadPromise } from '../lifecycles/load';
 import { toUnmountPromise } from '../lifecycles/unmount';
 import { toMountPromise } from '../lifecycles/mount';
 import { toBootstrapPromise } from '../lifecycles/bootstrap';
+import './navgiator-events';
 // 核心应用处理方法
 export function reroute() {
   //  需要获取要加载的应用

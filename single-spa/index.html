@@ -8,9 +8,20 @@
 </head>
 
 <body>
+  <!-- <a href="#/app1">应用1</a>
+  <a href="#/app2">应用2</a> -->
+  <a onclick="a()">应用a</a>
+  <a onclick="b()">应用b</a>
   <script src="/lib/umd/single-spa.js"></script>
 
   <script>
+
+    function a() {
+      history.pushState({}, 'a', '/a')
+    }
+    function b() {
+      history.pushState({}, 'b', '/b')
+    }
     // 加载
     singleSpa.registerApplication('app1',
       async (props) => {
@@ -26,7 +37,8 @@
           },
         }
       },
-      location => location.hash.startsWith('#/app1'),
+      // location => location.hash.startsWith('#/app1'),
+      location => location.pathname.startsWith('/a'),
       { store: { name: 'test1' } }
     )
 
@@ -44,12 +56,17 @@
           },
         }
       },
-      location => location.hash.startsWith('#/app2'),
+      // location => location.hash.startsWith('#/app2'),
+      location => location.pathname.startsWith('/b'),
       { store: { name: 'test2' } }
     )
 
     // 挂载
     singleSpa.start();
+
+    window.addEventListener('hashchange', () => {
+      console.log(1)
+    })
   </script>
 </body>
 
