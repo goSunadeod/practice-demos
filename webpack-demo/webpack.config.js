@@ -6,7 +6,8 @@ module.exports = {
     print: './src/print.js'
   },
   output: {
-    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, './dist'),
+    filename: '[name][hash4].bundle.js',
   },
   module: {
     rules: [
