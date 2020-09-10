@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+import useDocumentTitle from './hooks/useDocumentTitle'
+import useWindowSize from './hooks/useWindowSize'
 import './App.css';
 
 function App() {
+  useDocumentTitle('你好')
+  const size = useWindowSize()
+
+  useEffect(() => {
+    console.log(size)
+  }, [size])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h3>custom-hooks</h3>
     </div>
   );
 }
