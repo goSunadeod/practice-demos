@@ -10,6 +10,7 @@ module.exports = {
     filename: 'webpack.bundle.js',
     path: path.resolve(__dirname, './')
   },
+  mode: 'development',
   module: {
     rules: [
       {
@@ -24,8 +25,9 @@ module.exports = {
     ]
   },
   optimization: {
+    usedExports: true,
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [new TerserPlugin()]
   },
   plugins: [
     new webpack.DefinePlugin({

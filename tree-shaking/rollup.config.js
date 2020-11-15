@@ -10,7 +10,7 @@ export default {
   },
 
   plugins: [
-    babel(),
-    terser()
+    babel()
+    // terser()
   ]
 }

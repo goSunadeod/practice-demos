@@ -1,11 +1,4 @@
-let fo = () => {
-  let x = 1
-  if(false) {
-    console.log('never reached')
-  }
-  let a = 3
-  return a
-}
+import Menu from './menu.js'
 
 let baz = () => {
   var x = 1

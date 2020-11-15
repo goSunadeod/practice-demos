@@ -1,0 +1,15 @@
+/*! export default [provided] [unused] [could be renamed] */
+
+/*! namespace exports */
+
+/*! runtime requirements:  */
+
+/*! runtime requirements: __webpack_require__ */
+
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+
+/*!*********************!*\
+  !*** ./src/menu.js ***!
+  \*********************/
