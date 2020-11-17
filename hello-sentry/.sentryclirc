@@ -1,0 +1,7 @@
+[defaults]
+url=http://localhost:9000
+org=sundae
+project=hello-world
+
+[auth]
+token=b3ef55a63af246f1a262d0843ed86e8e7a51f0a1ae1b469f964583094f5807ce
