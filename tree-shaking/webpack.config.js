@@ -10,23 +10,24 @@ module.exports = {
     filename: 'webpack.bundle.js',
     path: path.resolve(__dirname, './')
   },
-  mode: 'development',
+  // mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
         test: /\.js$/,
-        use:{
-          loader:'babel-loader',
-          options:{
-              cacheDirectory:true
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true
           }
-       }
+        }
       }
     ]
   },
   optimization: {
     usedExports: true,
-    minimize: true,
+    // minimize: true,
     minimizer: [new TerserPlugin()]
   },
   plugins: [
