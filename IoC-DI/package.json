@@ -1,0 +1,21 @@
+{
+  "name": "IoC-DI",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.1.2"
+  }
+}
