@@ -1,15 +1,29 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 module.exports = {
-	entry: './index.js',
-	output: {
-		filename: 'bundle.js',
-		path: path.join(__dirname, '/')
+	entry: {
+		app: './src/index.js'
 	},
+	mode: 'development',
+	devtool: 'inline-source-map',
 	devServer: {
-		hot: true
+		contentBase: './dist',
+		hot: true,
 	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
-	]
-}
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			template: 'index.html',
+			title: 'Hot Module Replacement',
+		}),
+	],
+	optimization: {
+		usedExports: true
+	},
+	output: {
+		filename: '[name].bundle.js',
+		path: path.resolve(__dirname, 'dist'),
+	},
+};
