@@ -1,6 +1,7 @@
-import { B } from './b';
-import { A } from './a';
-import { container } from './container'
+// import { B } from './b';
+// import { A } from './a';
+// import { container } from './container'
+// import { load } from './load';
 
 
 // const b = new B(10);
@@ -8,14 +9,21 @@ import { container } from './container'
 // console.log(a); // A { b: B { p: 10 } }
 
 
-container.bind('a', A, []);
-container.bind('b', B, [10])
+// container.bind('a', A, []);
+// container.bind('b', B, [10])
+// const a = container.get('a');
+// console.log(a); // A => { b: B { p: 10 } }
 
 
-const a = container.get('a');
+import './b';
+import './a';
+import { Container } from './container'
+import { load } from './load';
+const container = new Container();
+load(container);
 
-console.log(a); // A => { b: B { p: 10 } }
-
+load(container);
+console.log(container.get('a')); // A => { b: B { p: 10 } }
 
 
 
