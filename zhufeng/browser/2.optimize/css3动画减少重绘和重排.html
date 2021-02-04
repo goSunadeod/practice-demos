@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <style>
+      /* show Rending 查看重绘操作 */
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg) /* 只会第一次绘制*/;
+          /* width: 100px; 用宽的时候每次都会绘制*/
+        }
+        to {
+          transform: rotate(360deg);
+          /* width: 500px; */
+        }
+      }
+      #app {
+        width: 100px;
+        height: 100px;
+        background: red;
+        animation: rotate 0.2s linear infinite;
+      }
+    </style>
+    <div id="app"></div>
+
+    <div style="opacity: 0.2">my</div>
+  </body>
+</html>
+
+<!-- cmd+shift+p -> Show Rendering -> Paint flashing 查看绘制次数，每次绿的时候表示绘制 -->

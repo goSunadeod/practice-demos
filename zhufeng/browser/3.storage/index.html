@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function cacheFile(url) {
+            let fileContent = localStorage.getItem(url);
+            if (fileContent) {
+                eval(fileContent)
+            } else {
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onload = function () {
+                    let reponseText = xhr.responseText
+                    eval(reponseText);
+                    localStorage.setItem(url, reponseText)
+                }
+                xhr.send()
+            }
+        }
+        cacheFile('/index.js');
+
+
+        let request = window.indexedDB.open('myDatabase');
+        request.onsuccess = function (event) {
+            let db = event.target.result;
+            let ts = db.transaction(['student'], 'readwrite')
+            ts.objectStore('student').add({ name: 'zf' })
+            let r = ts.objectStore('student').get(5);
+            r.onsuccess = function (e) {
+                console.log(e.target.result)
+            }
+        }
+        request.onupgradeneeded = function (event) {
+            let db = event.target.result;
+            if (!db.objectStoreNames.contains('student')) {
+                let store = db.createObjectStore('student', { autoIncrement: true });
+            }
+        }
+    </script>
+</body>
+
+</html>

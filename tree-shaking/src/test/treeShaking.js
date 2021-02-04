@@ -8,9 +8,9 @@ const args = process.argv[2]
 const buffer = fs.readFileSync(args).toString()
 const body = acorn.parse(buffer).body
 const jsEmitter = new JSEmitter()
-let decls = new Map()
-let calledDecls = []
-let code = []
+let decls = new Map() // 存储所有的函数或变量声明类型节点
+let calledDecls = [] // 存储了代码中真正使用到的数或变量声明
+let code = [] // 存储了其他所有没有被节点类型匹配的 AST 部分
 // 遍历处理
 body.forEach(function(node) {
     if (node.type == "FunctionDeclaration") {

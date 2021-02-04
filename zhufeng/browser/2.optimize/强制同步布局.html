@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script>
+      /* function reflow() {
+        let el = document.getElementById('app');
+        let node = document.createElement('h1');
+        node.innerHTML = 'hello';
+        el.appendChild(node);
+        // 强制同步布局：本来布局应该是在js执行完毕后执行，现在提前到了当前的js任务中去了
+        console.log(app.offsetTop); // 获取位置就会导致 重排 （重新布局）： 上面操作了app, 所以得先布局下才能知道位置
+      }
+      window.addEventListener('load', function () {
+        reflow();
+      }); */
+
+      // 更为糟糕的情况
+      /*  function reflow() {
+        let el = document.getElementById('app');
+        let node = document.createElement('h1');
+        node.innerHTML = 'hello';
+        el.appendChild(node);
+        // 强制同步布局
+        console.log(app.offsetTop);
+      }
+      window.addEventListener('load', function () {
+        for (let i = 0; i < 100; i++) {
+          reflow();
+        }
+      });
+ */
+      // 优化写法：读写分离
+      console.log(app.offsetTop); // 把读操作放在函数外面，只会在第一次读取时Layout
+      function reflow() {
+        let el = document.getElementById('app');
+        let node = document.createElement('h1');
+        node.innerHTML = 'hello';
+        el.appendChild(node);
+      }
+      window.addEventListener('load', function () {
+        for (let i = 0; i < 100; i++) {
+          reflow();
+        }
+      });
+    </script>
+  </body>
+</html>

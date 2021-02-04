@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- 需要等待所有的事件执行完毕后才能计算 -->
+    <div style="background-color: red; width: 100px; height: 100px"></div>
+    <h1 elementtiming="meaningful">珠峰</h1>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        // let s = 0;
+        // for (let i = 0; i < 100000000; i++) {
+        //     s += i;
+        // }
+        // console.log(s)
+        setTimeout(() => {
+          document.body.appendChild(document.createTextNode('hello')); // 有内容的绘制， 空div不算
+        }, 1000);
+      });
+      setTimeout(() => {
+        const {
+          fetchStart, // 开始访问
+          requestStart, // 请求的开始
+          responseStart, // 响应的开始
+          responseEnd, // 响应的结束
+          domInteractive, // dom可交互的时间点
+          domContentLoadedEventEnd, // dom加载完毕 + domcontentloaded完成的事件的事件 $(function(){})
+          loadEventStart, // 所有资源加载完毕
+        } = performance.timing;
+
+        let TTFB = responseStart - requestStart; // 首字节返回的事件 服务器的处理能力
+        let TTI = domInteractive - fetchStart; // 整个的一个可交互的市场
+        let DCL = domContentLoadedEventEnd - fetchStart; // DOM 整个加载完毕
+        let L = loadEventStart - fetchStart; // 所有资源加载完毕所用的时长
+
+        console.log(TTFB, TTI, DCL, L);
+
+        const paint = performance.getEntriesByType('paint'); // MDN
+        console.log(paint[0].startTime); // FP 只是画像素了而已
+        console.log(paint[1].startTime); // FCP 有内容才行
+      }, 3000); // 3s只是预测3s后所以时间都能拿到
+
+      // FMP first meaningful paint
+      new PerformanceObserver((entryList, observer) => {
+        console.log(entryList.getEntries()[0]);
+
+        observer.disconnect(); // 监控 完后直接结束即可
+      }).observe({ entryTypes: ['element'] });
+
+      // LCP
+      new PerformanceObserver((entryList, observer) => {
+        entryList = entryList.getEntries();
+        console.log(entryList[entryList.length - 1], entryList); // 取最后一个
+        observer.disconnect(); // 监控完后直接结束即可
+      }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+      // FID
+      new PerformanceObserver((entryList, observer) => {
+        firstInput = entryList.getEntries()[0];
+        if (!firstInput) return;
+        FID = firstInput.processingStart - firstInput.startTime;
+        console.log(FID);
+        observer.disconnect(); // 监控完后直接结束即可
+      }).observe({ type: ['first-input'], buffered: true });
+    </script>
+  </body>
+</html>
