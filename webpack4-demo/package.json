@@ -38,6 +38,6 @@
     "eslint": "^6.7.2",
     "eslint-loader": "^3.0.3",
     "file-loader": "^5.0.2",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   }
 }
